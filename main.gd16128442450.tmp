@@ -1,0 +1,62 @@
+extends Control
+
+
+var server_source : Variant
+
+
+func _server_browse_button_press() -> void:
+	$FileDialog.show()
+
+
+func confirm_source_selection():
+	print(server_source)
+	if server_source is DirAccess:
+		# server_source = server_source as DirAccess # This line would break the program on runtime. Uncomment it only to enable IntelliSense.
+		var file_count = len(server_source.get_files())
+		var folder_count = len(server_source.get_directories())
+		var source_size : float = 0.0
+		for file in server_source.get_files():
+			source_size += FileAccess.get_size(server_source.get_current_dir()+"/"+file)
+		var units = ["B","kB","MB","GB","TB"]
+		var using_unit = 0
+		while source_size / 1024 > 1 and using_unit < (len(units) - 1):
+			source_size /= 1024
+			print("Converted source_size to number ",source_size)
+			using_unit += 1
+		$"TabContainer/Send Files/FileSelect/WhatIsSelected".text = "Selected a folder of %d files and %d folders, total size %d %s" % [file_count, folder_count, source_size, units[using_unit]]
+	elif server_source is FileAccess:
+		var source_size : float = FileAccess.get_size(server_source.get_path_absolute())
+		var units = ["B","kB","MB","GB","TB"]
+		var using_unit = 0
+		while source_size / 1024 > 1 and using_unit < (len(units) - 1):
+			source_size /= 1024
+			print("Converted source_size to number ",source_size)
+			using_unit += 1
+		$"TabContainer/Send Files/FileSelect/WhatIsSelected".text = "Selected a %d %s .%s file" % [source_size, units[using_unit], server_source.get_path().split(".")[-1]]
+
+
+func _server_source_typed(new_text: String) -> void:
+	var diraccess = DirAccess.open(new_text)
+	var fileaccess = FileAccess.open(new_text,FileAccess.READ)
+	if is_instance_valid(diraccess):
+		print("Selected a valid directory")
+		server_source = diraccess
+		confirm_source_selection()
+	if is_instance_valid(fileaccess):
+		print("Selected a valid file")
+		server_source = fileaccess
+		confirm_source_selection()
+
+
+func _server_source_dir_select(dir: String) -> void:
+	$"TabContainer/Send Files/FileSelect/LineEdit".text = dir
+	var diraccess = DirAccess.open(dir)
+	server_source = diraccess
+	confirm_source_selection()
+
+
+func _server_source_file_select(path: String) -> void:
+	$"TabContainer/Send Files/FileSelect/LineEdit".text = path
+	var fileaccess = FileAccess.open(path,FileAccess.READ)
+	server_source = fileaccess
+	confirm_source_selection()

@@ -1,0 +1,346 @@
+[gd_scene format=3 uid="uid://dmbhn32ag1ywe"]
+
+[ext_resource type="Script" uid="uid://kf44fvarf12i" path="res://main.gd" id="1_i26rj"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_i26rj"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+color = Color(0.5, 0.5, 0.5, 1)
+thickness = 4
+vertical = true
+
+[node name="Root" type="Control" unique_id=693417641]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i26rj")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=751262086]
+
+[node name="SourceSelect" type="FileDialog" parent="." unique_id=1482526800]
+oversampling_override = 1.0
+title = "Open a File or Directory"
+initial_position = 2
+file_mode = 3
+access = 2
+show_hidden_files = true
+
+[node name="DestinationSelect" type="FileDialog" parent="." unique_id=796948209]
+oversampling_override = 1.0
+title = "Open a Directory"
+initial_position = 2
+file_mode = 2
+access = 2
+show_hidden_files = true
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=375102072]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Send Files" type="TabBar" parent="TabContainer" unique_id=1235710753]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Instruction" type="Label" parent="TabContainer/Send Files" unique_id=808664707]
+layout_mode = 0
+anchor_left = 0.013888889
+anchor_top = 0.027552674
+anchor_right = 0.9861111
+anchor_bottom = 0.14910859
+text = "Instruction: Host a server on a port of choice and select your Sources (files and folders you wish to share). When a client connects, they will be sent the Sources automatically and then dropped. 
+	(If you wish to receive files instead, click on a tab in the top-left corner of the screen.)"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ServerControl" type="Panel" parent="TabContainer/Send Files" unique_id=1998560913]
+layout_mode = 0
+anchor_left = 0.013888889
+anchor_top = 0.18314424
+anchor_right = 0.44444445
+anchor_bottom = 0.36466774
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Send Files/ServerControl" unique_id=287322450]
+layout_mode = 0
+offset_right = 112.0
+offset_bottom = 48.0
+text = "Server Port:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Send Files/ServerControl" unique_id=567060022]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 232.0
+offset_bottom = 48.0
+max_value = 65535.0
+value = 12676.0
+alignment = 1
+
+[node name="Button" type="Button" parent="TabContainer/Send Files/ServerControl" unique_id=423075090]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 224.0
+offset_bottom = 96.0
+text = "Start Hosting"
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Send Files/ServerControl" unique_id=2137153819]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 16.0
+offset_right = 248.0
+offset_bottom = 96.0
+theme_override_styles/separator = SubResource("StyleBoxLine_i26rj")
+
+[node name="Label2" type="Label" parent="TabContainer/Send Files/ServerControl" unique_id=1896398178]
+layout_mode = 0
+offset_left = 248.0
+offset_right = 496.0
+offset_bottom = 56.0
+text = "Status:"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ServerStatusLabel" type="Label" parent="TabContainer/Send Files/ServerControl" unique_id=153026306]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 56.0
+offset_right = 496.0
+offset_bottom = 112.0
+text = "Server Inactive"
+horizontal_alignment = 1
+
+[node name="FileSelect" type="Panel" parent="TabContainer/Send Files" unique_id=1402884150]
+layout_mode = 0
+anchor_left = 0.013888889
+anchor_top = 0.39059967
+anchor_right = 0.44444445
+anchor_bottom = 0.97406805
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Send Files/FileSelect" unique_id=710905813]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 48.0
+text = "Selected file:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Send Files/FileSelect" unique_id=452720966]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 16.0
+offset_right = 480.0
+offset_bottom = 48.0
+
+[node name="Browse" type="Button" parent="TabContainer/Send Files/FileSelect" unique_id=1018013931]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 56.0
+offset_right = 304.0
+offset_bottom = 88.0
+text = "Browse"
+
+[node name="WhatIsSelected" type="Label" parent="TabContainer/Send Files/FileSelect" unique_id=1267218622]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 104.0
+offset_right = 480.0
+offset_bottom = 344.0
+theme_override_colors/font_color = Color(0.51718444, 0.5171845, 0.51718444, 1)
+text = "Nothing selected"
+autowrap_mode = 2
+
+[node name="PeerList" type="Panel" parent="TabContainer/Send Files" unique_id=298187216]
+layout_mode = 0
+anchor_left = 0.4513889
+anchor_top = 0.24797407
+anchor_right = 0.9861111
+anchor_bottom = 0.97406805
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Send Files/PeerList" unique_id=1972915637]
+layout_mode = 0
+offset_top = -32.0
+offset_right = 40.0
+offset_bottom = -9.0
+text = "Connected Clients:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Send Files/PeerList" unique_id=1596442204]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 600.0
+offset_bottom = 432.0
+
+[node name="Receive Files" type="TabBar" parent="TabContainer" unique_id=1722215401]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Instruction" type="Label" parent="TabContainer/Receive Files" unique_id=1016111142]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013888889
+anchor_top = 0.027552674
+anchor_right = 0.9861111
+anchor_bottom = 0.14910859
+grow_horizontal = 2
+grow_vertical = 2
+text = "Instruction: Select download destination, then enter sharing server's IP and port and press \"begin download\". If you are using Radmin VPN or Hamachi, use host's Radmin/Hamachi IP. If you're located in a single network, use the server's local IP. If you are using VPN to connect to a university or a workplace network, use host's IP local to that network. To test whether you got a right IP, open terminal and do `ping <ip>` to test."
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="DownloadDestination" type="Panel" parent="TabContainer/Receive Files" unique_id=254252758]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013888889
+anchor_top = 0.18314424
+anchor_right = 0.44444445
+anchor_bottom = 0.3517018
+offset_bottom = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Receive Files/DownloadDestination" unique_id=259158123]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 120.0
+offset_bottom = 48.0
+text = "Download destination:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Receive Files/DownloadDestination" unique_id=2048654390]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 16.0
+offset_right = 480.0
+offset_bottom = 48.0
+
+[node name="Browse" type="Button" parent="TabContainer/Receive Files/DownloadDestination" unique_id=1099261353]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 56.0
+offset_right = 304.0
+offset_bottom = 88.0
+text = "Browse"
+
+[node name="ServerSpecifier" type="Panel" parent="TabContainer/Receive Files" unique_id=1207567248]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013888889
+anchor_top = 0.37763372
+anchor_right = 0.44444445
+anchor_bottom = 0.5591572
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Receive Files/ServerSpecifier" unique_id=1399964345]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 48.0
+text = "Server URL:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Receive Files/ServerSpecifier" unique_id=1424725721]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 16.0
+offset_right = 480.0
+offset_bottom = 47.0
+placeholder_text = "e.g. 192.168.0.1:12676"
+
+[node name="Button" type="Button" parent="TabContainer/Receive Files/ServerSpecifier" unique_id=32796109]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 64.0
+offset_right = 480.0
+offset_bottom = 96.0
+disabled = true
+text = "Begin Download"
+
+[node name="Progress" type="Panel" parent="TabContainer/Receive Files" unique_id=1357812658]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013888889
+anchor_top = 0.58508915
+anchor_right = 0.44444445
+anchor_bottom = 0.97406805
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="TabContainer/Receive Files/Progress" unique_id=284579359]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 48.0
+text = "Status: Idle."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="TabContainer/Receive Files/Progress" unique_id=1199105336]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 480.0
+offset_bottom = 80.0
+show_percentage = false
+
+[node name="TextProgress" type="Label" parent="TabContainer/Receive Files/Progress/ProgressBar" unique_id=561152083]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressLog" type="RichTextLabel" parent="TabContainer/Receive Files/Progress" unique_id=275496006]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 96.0
+offset_right = 480.0
+offset_bottom = 224.0
+
+[node name="Label" type="Label" parent="." unique_id=912104791]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -496.0
+offset_bottom = 32.0
+grow_horizontal = 0
+text = "HasteWarp by Artem Zinets (c) 2026"
+horizontal_alignment = 2
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_server_response"]
+[connection signal="dir_selected" from="SourceSelect" to="." method="_server_source_dir_select"]
+[connection signal="file_selected" from="SourceSelect" to="." method="_server_source_file_select"]
+[connection signal="files_selected" from="SourceSelect" to="." method="_server_source_multifile_select"]
+[connection signal="dir_selected" from="DestinationSelect" to="." method="_client_destination_chosen"]
+[connection signal="pressed" from="TabContainer/Send Files/ServerControl/Button" to="." method="_host_server"]
+[connection signal="text_submitted" from="TabContainer/Send Files/FileSelect/LineEdit" to="." method="_server_source_typed"]
+[connection signal="pressed" from="TabContainer/Send Files/FileSelect/Browse" to="." method="_server_browse_button_press"]
+[connection signal="text_submitted" from="TabContainer/Receive Files/DownloadDestination/LineEdit" to="." method="_download_destination_typed"]
+[connection signal="pressed" from="TabContainer/Receive Files/DownloadDestination/Browse" to="." method="_download_destination_select"]
+[connection signal="pressed" from="TabContainer/Receive Files/ServerSpecifier/Button" to="." method="_on_download_pressed"]
