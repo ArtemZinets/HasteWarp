@@ -59,9 +59,16 @@ func _server_source_file_select(path: String) -> void:
 
 
 func _host_server() -> void:
-	server = TCPServer.new()
-	server.listen($"TabContainer/Send Files/ServerControl/SpinBox".value)
-	$"TabContainer/Send Files/ServerControl/ServerStatusLabel".text = "Server Active"
+	if not is_instance_valid(server):
+		server = TCPServer.new()
+		server.listen($"TabContainer/Send Files/ServerControl/SpinBox".value)
+		$"TabContainer/Send Files/ServerControl/ServerStatusLabel".text = "Server Active"
+		$"TabContainer/Send Files/ServerControl/Button".text = "Stop Hosting"
+	else:
+		server.stop()
+		server = null
+		$"TabContainer/Send Files/ServerControl/ServerStatusLabel".text = "Server Inactive"
+		$"TabContainer/Send Files/ServerControl/Button".text = "Start Hosting"
 
 
 func _process(_delta : float) -> void:

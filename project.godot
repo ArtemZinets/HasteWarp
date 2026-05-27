@@ -12,6 +12,7 @@ config_version=5
 
 config/name="HasteWarp"
 config/description="Server-Client file transfer utility that assumes you have a VPN, VLAN or simply an ability to open ports."
+run/main_scene="uid://dmbhn32ag1ywe"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
